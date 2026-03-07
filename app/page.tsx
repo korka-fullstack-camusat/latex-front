@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import DropZone from "@/components/DropZone";
 import ResultCard from "@/components/ResultCard";
 
@@ -18,6 +18,7 @@ export default function Home() {
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<Result | null>(null);
   const [error, setError] = useState("");
+  const abortRef = useRef<AbortController | null>(null);
 
   const handleFile = useCallback((f: File) => {
     setFile(f);
@@ -26,8 +27,23 @@ export default function Home() {
     setStatus("idle");
   }, []);
 
+  const MAX_SIZE_MB = 20;
+
+  const cancel = () => {
+    abortRef.current?.abort();
+  };
+
   const convert = async () => {
     if (!file) return;
+
+    if (file.size > MAX_SIZE_MB * 1024 * 1024) {
+      setError(`Le fichier dépasse la limite de ${MAX_SIZE_MB} Mo.`);
+      setStatus("error");
+      return;
+    }
+
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     setStatus("converting");
     setError("");
@@ -41,6 +57,7 @@ export default function Home() {
       const res = await fetch(`${apiUrl}/convert`, {
         method: "POST",
         body: formData,
+        signal: controller.signal,
       });
 
       if (!res.ok) {
@@ -57,8 +74,14 @@ export default function Home() {
       setResult({ blob, filename, hasBibliography, imageCount });
       setStatus("success");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Une erreur inattendue est survenue.");
+      if (err instanceof DOMException && err.name === "AbortError") {
+        setError("Conversion annulée.");
+      } else {
+        setError(err instanceof Error ? err.message : "Une erreur inattendue est survenue.");
+      }
       setStatus("error");
+    } finally {
+      abortRef.current = null;
     }
   };
 
@@ -112,6 +135,17 @@ export default function Home() {
             "⚗️ Convertir en LaTeX"
           )}
         </button>
+
+        {/* Cancel button */}
+        {isConverting && (
+          <button
+            onClick={cancel}
+            className="mt-2 w-full py-2 px-6 rounded-xl font-semibold text-sm transition-all
+              bg-transparent border border-slate-600 text-slate-400 hover:border-slate-400 hover:text-slate-200"
+          >
+            Annuler
+          </button>
+        )}
 
         {/* Progress hint */}
         {isConverting && (
