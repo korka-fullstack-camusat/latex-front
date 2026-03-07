@@ -53,7 +53,7 @@ export default function Home() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "https://latex-api-3sgi.onrender.com";
       const res = await fetch(`${apiUrl}/convert`, {
         method: "POST",
         body: formData,
@@ -150,7 +150,7 @@ export default function Home() {
         {/* Progress hint */}
         {isConverting && (
           <p className="mt-3 text-center text-xs text-slate-500">
-            Claude analyse le document et génère le LaTeX…
+            L'AI de korka Diallo analyse le document et génère le LaTeX…
           </p>
         )}
 
@@ -180,7 +180,7 @@ export default function Home() {
         ))}
       </div>
 
-      <p className="mt-6 text-slate-700 text-xs">Propulsé par Claude Opus 4.6</p>
+      <p className="mt-6 text-slate-700 text-xs">Propulsé par Amadou korka Diallo</p>
     </main>
   );
 }
