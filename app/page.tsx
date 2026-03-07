@@ -88,27 +88,27 @@ export default function Home() {
   const isConverting = status === "converting";
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col items-center justify-center p-4">
+    <main className="min-h-screen bg-gradient-to-br from-slate-100 via-white to-slate-100 flex flex-col items-center justify-center p-4">
       {/* Header */}
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 mb-4">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-100 border border-indigo-200 mb-4">
           <span className="text-3xl">⚗️</span>
         </div>
-        <h1 className="text-3xl font-bold text-white tracking-tight">
-          Word <span className="text-slate-500">→</span> LaTeX
+        <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+          Word <span className="text-slate-400">→</span> LaTeX
         </h1>
-        <p className="text-slate-400 mt-2 text-sm">
+        <p className="text-slate-500 mt-2 text-sm">
           Convertissez vos documents Word en code LaTeX compilable
         </p>
       </div>
 
       {/* Card */}
-      <div className="w-full max-w-lg bg-slate-900/60 backdrop-blur border border-slate-700/50 rounded-3xl shadow-2xl p-6">
+      <div className="w-full max-w-lg bg-white/80 backdrop-blur border border-slate-200 rounded-3xl shadow-xl p-6">
         <DropZone file={file} onFile={handleFile} disabled={isConverting} />
 
         {/* Error */}
         {error && (
-          <div className="mt-4 flex items-start gap-2.5 p-3.5 bg-red-950/40 border border-red-700/40 rounded-xl text-sm text-red-300">
+          <div className="mt-4 flex items-start gap-2.5 p-3.5 bg-red-50 border border-red-200 rounded-xl text-sm text-red-600">
             <span className="mt-0.5 shrink-0">⚠️</span>
             <span>{error}</span>
           </div>
@@ -119,8 +119,8 @@ export default function Home() {
           onClick={convert}
           disabled={!file || isConverting}
           className="mt-5 w-full py-3 px-6 rounded-xl font-semibold text-sm transition-all
-            bg-indigo-600 hover:bg-indigo-500 active:scale-95
-            disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed
+            bg-indigo-600 hover:bg-indigo-500 active:scale-95 text-white
+            disabled:bg-slate-100 disabled:text-slate-400 disabled:cursor-not-allowed
             flex items-center justify-center gap-2"
         >
           {isConverting ? (
@@ -141,7 +141,7 @@ export default function Home() {
           <button
             onClick={cancel}
             className="mt-2 w-full py-2 px-6 rounded-xl font-semibold text-sm transition-all
-              bg-transparent border border-slate-600 text-slate-400 hover:border-slate-400 hover:text-slate-200"
+              bg-transparent border border-slate-300 text-slate-500 hover:border-slate-500 hover:text-slate-700"
           >
             Annuler
           </button>
@@ -149,7 +149,7 @@ export default function Home() {
 
         {/* Progress hint */}
         {isConverting && (
-          <p className="mt-3 text-center text-xs text-slate-500">
+          <p className="mt-3 text-center text-xs text-slate-400">
             Claude analyse le document et génère le LaTeX…
           </p>
         )}
@@ -172,15 +172,15 @@ export default function Home() {
           { icon: "🖼", label: "Images extraites", desc: "Figures numérotées dans le ZIP" },
           { icon: "📚", label: "Bibliographie", desc: "BibTeX auto (APA, IEEE…)" },
         ].map((f) => (
-          <div key={f.label} className="bg-slate-900/40 border border-slate-800 rounded-2xl p-3">
+          <div key={f.label} className="bg-white/60 border border-slate-200 rounded-2xl p-3">
             <div className="text-2xl mb-1">{f.icon}</div>
-            <p className="text-xs font-semibold text-slate-300">{f.label}</p>
+            <p className="text-xs font-semibold text-slate-700">{f.label}</p>
             <p className="text-xs text-slate-500 mt-0.5">{f.desc}</p>
           </div>
         ))}
       </div>
 
-      <p className="mt-6 text-slate-700 text-xs">Propulsé par Claude Opus 4.6</p>
+      <p className="mt-6 text-slate-400 text-xs">Propulsé par Claude Opus 4.6</p>
     </main>
   );
 }
