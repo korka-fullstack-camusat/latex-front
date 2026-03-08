@@ -6,9 +6,10 @@ interface DropZoneProps {
   file: File | null;
   onFile: (f: File) => void;
   disabled?: boolean;
+  maxSizeMb?: number;
 }
 
-export default function DropZone({ file, onFile, disabled }: DropZoneProps) {
+export default function DropZone({ file, onFile, disabled, maxSizeMb }: DropZoneProps) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -36,10 +37,10 @@ export default function DropZone({ file, onFile, disabled }: DropZoneProps) {
         "relative border-2 border-dashed rounded-2xl p-10 text-center transition-all select-none",
         disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
         dragging
-          ? "border-indigo-400 bg-indigo-950/40 scale-[1.01]"
+          ? "border-indigo-400 bg-indigo-50 scale-[1.01]"
           : file
-          ? "border-emerald-500 bg-emerald-950/20"
-          : "border-slate-600 hover:border-slate-400 bg-slate-900/40",
+          ? "border-emerald-400 bg-emerald-50"
+          : "border-slate-300 hover:border-slate-500 bg-slate-50",
       ].join(" ")}
     >
       <input
@@ -58,16 +59,19 @@ export default function DropZone({ file, onFile, disabled }: DropZoneProps) {
       {file ? (
         <div className="flex flex-col items-center gap-2">
           <span className="text-5xl">📄</span>
-          <p className="font-semibold text-emerald-300 text-lg truncate max-w-xs">{file.name}</p>
-          <p className="text-sm text-slate-400">{(file.size / 1024).toFixed(1)} Ko · cliquez pour changer</p>
+          <p className="font-semibold text-emerald-700 text-lg truncate max-w-xs">{file.name}</p>
+          <p className="text-sm text-slate-500">{(file.size / 1024).toFixed(1)} Ko · cliquez pour changer</p>
         </div>
       ) : (
         <div className="flex flex-col items-center gap-2">
           <span className="text-5xl">{dragging ? "📥" : "📂"}</span>
-          <p className="font-semibold text-slate-300 text-lg">
+          <p className="font-semibold text-slate-700 text-lg">
             {dragging ? "Déposez ici !" : "Glissez votre fichier .docx"}
           </p>
           <p className="text-sm text-slate-500">ou cliquez pour parcourir</p>
+          {maxSizeMb && (
+            <p className="text-xs text-slate-400 mt-1">Taille max : {maxSizeMb} Mo · format .docx uniquement</p>
+          )}
         </div>
       )}
     </div>

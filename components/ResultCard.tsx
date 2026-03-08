@@ -18,10 +18,10 @@ export default function ResultCard({ blob, filename, hasBibliography, imageCount
   };
 
   return (
-    <div className="mt-5 rounded-2xl border border-emerald-700/50 bg-emerald-950/20 p-5">
+    <div className="mt-5 rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
       <div className="flex items-center gap-2 mb-4">
         <span className="text-xl">✅</span>
-        <span className="font-semibold text-emerald-300">Conversion réussie !</span>
+        <span className="font-semibold text-emerald-700">Conversion réussie !</span>
       </div>
 
       {/* Badges */}
@@ -38,12 +38,12 @@ export default function ResultCard({ blob, filename, hasBibliography, imageCount
       </div>
 
       {/* Contenu du ZIP */}
-      <p className="text-xs text-slate-400 mb-4">
-        Le ZIP contient : <code className="text-slate-300">document.tex</code>
-        {hasBibliography && <>, <code className="text-slate-300">references.bib</code></>}
-        {imageCount > 0 && <>, les images au format <code className="text-slate-300">figure_N.png</code></>}.
+      <p className="text-xs text-slate-500 mb-4">
+        Le ZIP contient : <code className="text-slate-700">document.tex</code>
+        {hasBibliography && <>, <code className="text-slate-700">references.bib</code></>}
+        {imageCount > 0 && <>, les images au format <code className="text-slate-700">figure_N.png</code></>}.
         Placez tous les fichiers dans le même dossier avant de compiler avec{" "}
-        <code className="text-slate-300">pdflatex</code>.
+        <code className="text-slate-700">pdflatex</code>.
       </p>
 
       <button
@@ -66,9 +66,9 @@ function Badge({
   color: "slate" | "amber" | "blue";
 }) {
   const cls = {
-    slate: "bg-slate-700/60 text-slate-300",
-    amber: "bg-amber-900/40 text-amber-300 border border-amber-700/40",
-    blue: "bg-blue-900/40 text-blue-300 border border-blue-700/40",
+    slate: "bg-slate-100 text-slate-700",
+    amber: "bg-amber-50 text-amber-700 border border-amber-200",
+    blue: "bg-blue-50 text-blue-700 border border-blue-200",
   }[color];
 
   return (
