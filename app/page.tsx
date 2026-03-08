@@ -224,16 +224,17 @@ export default function Home() {
   /* ── Converter panel content (shared) ─────────────────────────────── */
   const converterContent = (
     <div className="w-full max-w-lg">
-      {/* Header */}
-      <div className="text-center mb-8">
+      {/* Welcome banner */}
+      <div className="text-center mb-6 px-2">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-100 border border-indigo-200 mb-4">
           <span className="text-3xl">⚗️</span>
         </div>
         <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
-          Word <span className="text-slate-400">→</span> LaTeX
+          Bienvenue sur Word <span className="text-slate-400">→</span> LaTeX
         </h1>
-        <p className="text-slate-500 mt-2 text-sm">
-          Convertissez vos documents Word en code LaTeX compilable
+        <p className="text-slate-600 mt-3 text-sm leading-relaxed max-w-sm mx-auto">
+          Transformez vos documents Word en code LaTeX compilable en quelques secondes.
+          Déposez votre fichier <span className="font-semibold text-indigo-600">.docx</span> ci-dessous pour commencer.
         </p>
       </div>
 
@@ -344,25 +345,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* Features grid */}
-      <div className="mt-8 grid grid-cols-3 gap-3 text-center">
-        {[
-          { icon: "🔤", label: "Formatage préservé",  desc: "Gras, italique, listes, tableaux" },
-          { icon: "🖼",  label: "Images extraites",    desc: "Figures numérotées dans le ZIP" },
-          { icon: "📚", label: "Bibliographie",        desc: "BibTeX auto (APA, IEEE…)" },
-          { icon: "∑",  label: "Maths",                desc: "Équations inline et display" },
-          { icon: "💻", label: "Code",                 desc: "Python, Bash, SQL, C…" },
-          { icon: "📐", label: "5 templates",          desc: "Article, IEEE, Beamer…" },
-        ].map((f) => (
-          <div key={f.label} className="bg-white/60 border border-slate-200 rounded-2xl p-3">
-            <div className="text-2xl mb-1">{f.icon}</div>
-            <p className="text-xs font-semibold text-slate-700">{f.label}</p>
-            <p className="text-xs text-slate-500 mt-0.5">{f.desc}</p>
-          </div>
-        ))}
-      </div>
-
-      <p className="mt-8 text-slate-400 text-xs text-center">Propulsé par Claude (Anthropic)</p>
+      <p className="mt-6 text-slate-400 text-xs text-center">Propulsé par Claude (Anthropic)</p>
     </div>
   );
 
@@ -370,18 +353,18 @@ export default function Home() {
   if (showArtifact) {
     return (
       <div className="flex h-screen w-screen overflow-hidden bg-slate-100">
-        {/* Left: artifact */}
-        <div className="w-[60%] h-full border-r border-[#313244] shrink-0">
+        {/* Left: converter */}
+        <div className="w-[40%] h-full overflow-y-auto bg-gradient-to-br from-slate-100 via-white to-slate-100 flex flex-col items-center p-6 py-10 shrink-0">
+          {converterContent}
+        </div>
+
+        {/* Right: artifact */}
+        <div className="flex-1 h-full border-l border-[#313244]">
           <ArtifactPanel
             latex={result!.latexContent}
             filename={result!.filename}
             onClose={() => setArtifactOpen(false)}
           />
-        </div>
-
-        {/* Right: converter */}
-        <div className="flex-1 h-full overflow-y-auto bg-gradient-to-br from-slate-100 via-white to-slate-100 flex flex-col items-center p-6 py-10">
-          {converterContent}
         </div>
       </div>
     );
