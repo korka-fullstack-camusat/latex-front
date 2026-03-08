@@ -230,7 +230,21 @@ export default function Home() {
       {/* Welcome banner */}
       <div className="text-center mb-6 px-2">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-indigo-100 border border-indigo-200 mb-4">
-          <span className="text-3xl">⚗️</span>
+          <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {/* Word doc */}
+            <rect x="2" y="4" width="13" height="17" rx="2" fill="#6366f1" opacity="0.15" stroke="#6366f1" strokeWidth="1.5"/>
+            <line x1="5" y1="9" x2="12" y2="9" stroke="#6366f1" strokeWidth="1.2" strokeLinecap="round"/>
+            <line x1="5" y1="12" x2="12" y2="12" stroke="#6366f1" strokeWidth="1.2" strokeLinecap="round"/>
+            <line x1="5" y1="15" x2="9" y2="15" stroke="#6366f1" strokeWidth="1.2" strokeLinecap="round"/>
+            {/* Arrow */}
+            <path d="M16.5 12.5 L19.5 12.5" stroke="#94a3b8" strokeWidth="1.5" strokeLinecap="round"/>
+            <path d="M18 11 L19.8 12.5 L18 14" stroke="#94a3b8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            {/* LaTeX doc */}
+            <rect x="21" y="4" width="13" height="17" rx="2" fill="#a855f7" opacity="0.12" stroke="#a855f7" strokeWidth="1.5"/>
+            <text x="24.5" y="14" fontSize="6.5" fontWeight="700" fill="#a855f7" fontFamily="serif">TeX</text>
+            {/* Bottom label */}
+            <text x="18" y="30" fontSize="5" fill="#94a3b8" textAnchor="middle" fontFamily="monospace">.docx → .tex</text>
+          </svg>
         </div>
         <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
           Bienvenue sur Word <span className="text-slate-400">→</span> LaTeX
