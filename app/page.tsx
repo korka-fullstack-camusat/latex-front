@@ -319,7 +319,7 @@ export default function Home() {
               Conversion en cours…
             </>
           ) : (
-            "⚗️ Convertir en LaTeX"
+            "Convertir en LaTeX"
           )}
         </button>
 
@@ -336,7 +336,7 @@ export default function Home() {
 
         {isConverting && (
           <p className="mt-3 text-center text-xs text-slate-400">
-            Claude analyse le document et génère le LaTeX…
+            L'AI de korka Diallo analyse le document et génère le LaTeX…
           </p>
         )}
 
@@ -362,7 +362,7 @@ export default function Home() {
         )}
       </div>
 
-      <p className="mt-6 text-slate-400 text-xs text-center">Propulsé par Claude (Anthropic)</p>
+      <p className="mt-6 text-slate-400 text-xs text-center">Propulsé par Amadou korka Diallo</p>
     </div>
   );
 
