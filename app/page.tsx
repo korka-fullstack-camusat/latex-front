@@ -93,7 +93,7 @@ export default function Home() {
       formData.append("file", file);
       formData.append("template", template);
 
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL ?? "https://latex-api-3sgi.onrender.com";
       const res = await fetch(`${apiUrl}/convert`, {
         method: "POST",
         body: formData,
