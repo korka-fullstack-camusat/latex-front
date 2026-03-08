@@ -48,7 +48,10 @@ function ArtifactPanel({
       {/* Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-[#181825] border-b border-[#313244] shrink-0">
         <div className="flex items-center gap-2">
-          <span className="text-slate-400 text-[11px]">⬡</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#cba6f7]">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
           <span className="text-slate-300 text-[13px] font-semibold">
             {filename.replace(/_latex\.zip$/, ".tex")}
           </span>
