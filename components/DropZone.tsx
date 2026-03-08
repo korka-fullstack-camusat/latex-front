@@ -6,9 +6,10 @@ interface DropZoneProps {
   file: File | null;
   onFile: (f: File) => void;
   disabled?: boolean;
+  maxSizeMb?: number;
 }
 
-export default function DropZone({ file, onFile, disabled }: DropZoneProps) {
+export default function DropZone({ file, onFile, disabled, maxSizeMb }: DropZoneProps) {
   const [dragging, setDragging] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -68,6 +69,9 @@ export default function DropZone({ file, onFile, disabled }: DropZoneProps) {
             {dragging ? "Déposez ici !" : "Glissez votre fichier .docx"}
           </p>
           <p className="text-sm text-slate-500">ou cliquez pour parcourir</p>
+          {maxSizeMb && (
+            <p className="text-xs text-slate-400 mt-1">Taille max : {maxSizeMb} Mo · format .docx uniquement</p>
+          )}
         </div>
       )}
     </div>
